@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MatTableModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
 
 import { WeatherService} from './services/weather.service';
@@ -25,7 +26,8 @@ import { CityInputComponent } from './components/city-input/city-input.component
     HttpClientModule,
     MatInputModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

@@ -1,5 +1,9 @@
-<form (ngSubmit)="submit()">
+<form class="example-container" (ngSubmit)="submit()">
 
-      <input matInput type="text" [(ngModel)]="inputTextValue" [ngModelOptions]="{standalone:true}">
+  <mat-form-field>
+
+      <input matInput type="text" [(ngModel)]="inputTextValue" [ngModelOptions]="{standalone:true}" placeholder="Add city">
+
+  </mat-form-field>
 
 </form>

@@ -1,7 +1,10 @@
-table{
-  width: 100%;
-}
 
 .table-container{
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-container > * {
+  width: 70%;
 }
