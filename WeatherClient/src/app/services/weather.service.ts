@@ -12,7 +12,7 @@ import { observable } from 'rxjs';
 export class WeatherService {
 
   private getWeatherURL = 'http://localhost:3000/api/cities';
-  private addCitiURL = 'http://localhost:3000/api/add';
+  private addCitiURL = 'http://localhost:3000/api/city/add';
 
   constructor(private http: HttpClient) { }
 
