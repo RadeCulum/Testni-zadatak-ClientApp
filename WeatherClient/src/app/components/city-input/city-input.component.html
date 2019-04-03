@@ -8,10 +8,13 @@
       placeholder="Add city"
     />
   </mat-form-field>
-  <mat-error class="error" *ngIf="cityExistError"
-    >City already exists</mat-error
-  >
-  <mat-error class="error" *ngIf="cityDoesntExistError"
-    >city doesn't exist</mat-error
-  >
 </form>
+<mat-error class="message" *ngIf="cityExistError"
+  >City already exist</mat-error
+>
+<mat-error class="message" *ngIf="cityDoesntExistError"
+  >city doesn't exist</mat-error
+>
+<mat-label class="message" *ngIf="citySuccessMessage"
+  >Uspješno dodan, osvježi stranicu da bi bio prikazan.</mat-label
+>

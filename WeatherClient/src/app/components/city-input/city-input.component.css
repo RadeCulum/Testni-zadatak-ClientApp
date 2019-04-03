@@ -13,7 +13,10 @@ input{
   text-align: center;
 }
 
-.error{
+.message{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 

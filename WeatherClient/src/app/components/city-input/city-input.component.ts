@@ -11,17 +11,24 @@ export class CityInputComponent implements OnInit {
   inputTextValue = '';
   cityExistError = false;
   cityDoesntExistError = false;
+  citySuccessMessage = false;
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
     this.weatherService.inputMessage.subscribe(message => {
-      this.cityDoesntExistError = message;
+      if (message) {
+        this.cityDoesntExistError = message;
+      } else {
+        this.citySuccessMessage = true;
+        setTimeout(() => {
+          this.citySuccessMessage = false;
+        }, 5000);
+      }
     });
   }
 
   async submit() {
     this.cityDoesntExistError = false;
-    console.log(this.inputTextValue);
     this.cityExistError = this.weatherService.doesItExistInTable(
       this.inputTextValue
     );

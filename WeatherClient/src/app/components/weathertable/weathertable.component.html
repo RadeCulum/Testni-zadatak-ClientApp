@@ -2,7 +2,7 @@
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="city">
       <th mat-header-cell *matHeaderCellDef>Cyty</th>
-      <td mat-cell *matCellDef="let element" (click)="show(element.city)">
+      <td mat-cell *matCellDef="let element">
         {{ element.city }}
       </td>
     </ng-container>
@@ -22,6 +22,7 @@
       id="table-rows"
       mat-row
       *matRowDef="let row; columns: displayedColumns"
+      (click)="show(row)"
     ></tr>
   </table>
 

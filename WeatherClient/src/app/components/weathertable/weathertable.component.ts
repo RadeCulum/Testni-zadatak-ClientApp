@@ -15,7 +15,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { timeout } from 'q';
 
 @Component({
-  // tslint:disable-next-line: component-selector
+// tslint:disable-next-line: component-selector
   selector: 'weathertable',
   templateUrl: './weathertable.component.html',
   styleUrls: ['./weathertable.component.css']
@@ -26,7 +26,6 @@ export class WeathertableComponent implements OnInit, AfterViewChecked {
   constructor(
     private weatherService: WeatherService,
     private dialog: MatDialog,
-    private cdRef: ChangeDetectorRef
   ) {}
 
   // tslint:disable-next-line: no-use-before-declare
@@ -42,7 +41,7 @@ export class WeathertableComponent implements OnInit, AfterViewChecked {
       this.isLoadingAfter = message;
     });
   }
-  async show(value) {
+  show(value) {
     this.weatherService.prepareDialog(value);
     this.dialog.open(DialogComponent);
   }

@@ -8,7 +8,7 @@ import {
   HttpHeaders,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class WeatherService {
   private inputMessageSource = new Subject<any>();
   inputMessage = this.inputMessageSource.asObservable();
 
-  private inputDialogMessage = new Subject<any>();
+  private inputDialogMessage = new ReplaySubject<any>(1);
   dialogMessage = this.inputDialogMessage.asObservable();
 
   private inputLoaderMessage = new Subject<any>();
@@ -35,13 +35,11 @@ export class WeatherService {
     result.subscribe((res: Response) => {
       let i = 0;
       while (res[i]) {
-        this.cities.push(res[i]);
+        this.cities[i] = res[i];
         i++;
       }
-      console.log('Mozes prastati');
       this.inputLoaderMessage.next(false);
     });
-
     return result as Observable<Weather[]>;
   }
 
@@ -56,14 +54,11 @@ export class WeatherService {
       response.subscribe(
         res => {
           this.cities.push(res);
+          this.inputMessageSource.next(false);
         },
         (err: HttpErrorResponse) => {
           if (err) {
-            console.log('Grad ne postoji' + err);
             this.inputMessageSource.next(true);
-          } else {
-            console.log('Nema errora');
-            this.inputMessageSource.next(false);
           }
         }
       );
@@ -78,17 +73,10 @@ export class WeatherService {
         res = true;
       }
     });
-    console.log('Grad postoji ' + res);
     return res;
   }
 
-  prepareDialog(city) {
-    this.cities.forEach(element => {
-      // console.log(element.city);
-      if ((city + '').toLowerCase() === (element.city + '').toLowerCase()) {
-        // console.log('NAOSAO SAM GA');
-        this.inputDialogMessage.next(element);
-      }
-    });
+  prepareDialog(weather) {
+    this.inputDialogMessage.next(weather);
   }
 }
