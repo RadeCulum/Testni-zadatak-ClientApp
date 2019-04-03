@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CityInputComponent } from './city-input.component';
+import { DialogComponent } from './dialog.component';
 
-describe('CityInputComponent', () => {
-  let component: CityInputComponent;
-  let fixture: ComponentFixture<CityInputComponent>;
+describe('DialogComponent', () => {
+  let component: DialogComponent;
+  let fixture: ComponentFixture<DialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CityInputComponent]
-    }).compileComponents();
+      declarations: [ DialogComponent ]
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CityInputComponent);
+    fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

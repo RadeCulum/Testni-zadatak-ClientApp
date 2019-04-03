@@ -1,24 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 
 @Component({
-// tslint:disable-next-line: component-selector
+  // tslint:disable-next-line: component-selector
   selector: 'city-input',
   templateUrl: './city-input.component.html',
   styleUrls: ['./city-input.component.css']
 })
 export class CityInputComponent implements OnInit {
-
   inputTextValue = '';
-  constructor(private userService: WeatherService) { }
+  cityExistError = false;
+  cityDoesntExistError = false;
+  constructor(private weatherService: WeatherService) {}
 
   ngOnInit() {
+    this.weatherService.inputMessage.subscribe(message => {
+      this.cityDoesntExistError = message;
+    });
   }
 
-  submit() {
+  async submit() {
+    this.cityDoesntExistError = false;
     console.log(this.inputTextValue);
-    console.log(this.userService.addCity(this.inputTextValue));
+    this.cityExistError = this.weatherService.doesItExistInTable(
+      this.inputTextValue
+    );
+    if (!this.cityExistError) {
+      this.weatherService.addCity(this.inputTextValue);
+    }
   }
-
 }
-

@@ -1,9 +1,17 @@
 <form class="example-container" (ngSubmit)="submit()">
-
   <mat-form-field>
-
-      <input matInput type="text" [(ngModel)]="inputTextValue" [ngModelOptions]="{standalone:true}" placeholder="Add city">
-
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="inputTextValue"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Add city"
+    />
   </mat-form-field>
-
+  <mat-error class="error" *ngIf="cityExistError"
+    >City already exists</mat-error
+  >
+  <mat-error class="error" *ngIf="cityDoesntExistError"
+    >city doesn't exist</mat-error
+  >
 </form>
