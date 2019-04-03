@@ -34,11 +34,7 @@ export class WeathertableComponent implements OnInit, AfterViewChecked {
   displayedColumns: string[] = ['city', 'temperature', 'description'];
 
   ngAfterViewChecked(): void {
-    console.log(this.isLoading + '  ' + this.isLoadingAfter);
-    if (this.isLoadingAfter != this.isLoading) {
-      this.isLoading = this.isLoadingAfter;
-      this.cdRef.detectChanges();
-    }
+    this.isLoading = this.isLoadingAfter;
   }
 
   ngOnInit() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
-import { Weather } from 'src/app/models/weather.model';
 
 @Component({
   selector: 'app-dialog',

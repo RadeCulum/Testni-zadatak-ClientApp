@@ -25,11 +25,6 @@
     ></tr>
   </table>
 
-  <mat-card
-    *ngIf="isLoading"
-    style="display: flex; justify-content: center; align-items: center"
-  >
-    <mat-progress-spinner color="primary" mode="indeterminate">
-    </mat-progress-spinner>
-  </mat-card>
+  <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate">
+  </mat-progress-spinner>
 </div>
