@@ -48,9 +48,7 @@ export class WeathertableComponent implements OnInit, AfterViewChecked {
   }
   async show(value) {
     this.weatherService.prepareDialog(value);
-    setTimeout(() => {
-      this.dialog.open(DialogComponent);
-    }, 1000);
+    this.dialog.open(DialogComponent);
   }
 }
 

@@ -30,6 +30,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeather(): Observable<Weather[]> {
+    this.inputLoaderMessage.next(false);
     const result = this.http.get(this.getWeatherURL);
     result.subscribe((res: Response) => {
       let i = 0;

@@ -16,7 +16,7 @@ import { Weather } from 'src/app/models/weather.model';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  city = 'Banja Luka';
+  public city: string;
   public temperature: number;
   public description: string;
   public pressure: number;
