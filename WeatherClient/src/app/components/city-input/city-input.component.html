@@ -3,6 +3,7 @@
     <input
       matInput
       type="text"
+      autocomplete="off"
       [(ngModel)]="inputTextValue"
       [ngModelOptions]="{ standalone: true }"
       placeholder="Add city"
@@ -10,11 +11,11 @@
   </mat-form-field>
 </form>
 <mat-error class="message" *ngIf="cityExistError"
-  >City already exist</mat-error
+  >{{submittedValue}} already exist!</mat-error
 >
 <mat-error class="message" *ngIf="cityDoesntExistError"
-  >city doesn't exist</mat-error
+  >{{submittedValue}} doesn't exist!</mat-error
 >
-<mat-label class="message" *ngIf="citySuccessMessage"
-  >City was added successfully, refresh page to se it.</mat-label
+<mat-label class="success-message" *ngIf="citySuccessMessage"
+  >{{submittedValue}} was added successfully.</mat-label
 >

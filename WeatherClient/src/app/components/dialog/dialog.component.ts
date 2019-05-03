@@ -3,7 +3,7 @@ import { WeatherService } from 'src/app/services/weather.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'dialogComponent',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })

@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import { Weather } from '../models/weather.model';
-import {
-  HttpClient,
-  HttpParams,
-  HttpHeaders,
-  HttpErrorResponse
-} from '@angular/common/http';
-import { Subject, ReplaySubject } from 'rxjs';
+
+import { ReplaySubject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class WeatherService {
   private getWeatherURL = 'http://localhost:3000/api/cities';
   private addCitiURL = 'http://localhost:3000/api/city/add';
   private cities = [];
 
-  private inputMessageSource = new Subject<any>();
+  private inputMessageSource = new ReplaySubject<any>(1);
   inputMessage = this.inputMessageSource.asObservable();
 
-  private inputDialogMessage = new ReplaySubject<any>(1);
-  dialogMessage = this.inputDialogMessage.asObservable();
+  private dialogMessageSource = new ReplaySubject<any>(1);
+  dialogMessage = this.dialogMessageSource.asObservable();
 
-  private inputLoaderMessage = new Subject<any>();
-  loaderMessage = this.inputLoaderMessage.asObservable();
+  private loaderMessageSource = new ReplaySubject<any>(1);
+  loaderMessage = this.loaderMessageSource.asObservable();
 
   constructor(private http: HttpClient) {}
 
   getWeather(): Observable<Weather[]> {
-    this.inputLoaderMessage.next(true);
+    this.loaderMessageSource.next(true);
     const result = this.http.get(this.getWeatherURL);
     result.subscribe((res: Response) => {
       let i = 0;
@@ -38,12 +35,12 @@ export class WeatherService {
         this.cities[i] = res[i];
         i++;
       }
-      this.inputLoaderMessage.next(false);
+      this.loaderMessageSource.next(false);
     });
     return result as Observable<Weather[]>;
   }
 
-  addCity(cityName) {
+  addCity(cityName: string) {
     if (this.doesItExistInTable(cityName)) {
       this.inputMessageSource.next(true);
     } else {
@@ -65,9 +62,8 @@ export class WeatherService {
     }
   }
 
-  doesItExistInTable(city) {
+  doesItExistInTable(city: string) {
     let res = false;
-    // tslint:disable-next-line: no-shadowed-variable
     this.cities.forEach(element => {
       if ((city + '').toLowerCase() === (element.city + '').toLowerCase()) {
         res = true;
@@ -76,7 +72,7 @@ export class WeatherService {
     return res;
   }
 
-  prepareDialog(weather) {
-    this.inputDialogMessage.next(weather);
+  prepareDialog(weather: any) {
+    this.dialogMessageSource.next(weather);
   }
 }

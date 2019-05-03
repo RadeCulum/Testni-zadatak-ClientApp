@@ -8,3 +8,25 @@
 .table-container > * {
   width: 70%;
 }
+
+th, td {
+  width: 33% ;
+  color:black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mat-row:nth-child(even){
+  background-color: darkgrey;
+  }
+
+.mat-row:nth-child(odd){
+  background-color: gray;
+  }
+
+.mat-header-row {
+  background-color: cadetblue;
+}
+
+.mat-progress-spinner {
+  margin-top: 2%;
+}
