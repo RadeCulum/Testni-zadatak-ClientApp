@@ -24,7 +24,7 @@ export class WeatherService {
   private loaderMessageSource = new ReplaySubject<any>(1);
   loaderMessage = this.loaderMessageSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getWeather(): Observable<Weather[]> {
     this.loaderMessageSource.next(true);
@@ -41,25 +41,20 @@ export class WeatherService {
   }
 
   addCity(cityName: string) {
-    if (this.doesItExistInTable(cityName)) {
-      this.inputMessageSource.next(true);
-    } else {
-      let body = new HttpParams();
-      body = body.set('city', cityName);
+    let body = new HttpParams();
+    body = body.set('city', cityName);
 
-      const response = this.http.post(this.addCitiURL, body);
-      response.subscribe(
-        res => {
-          this.cities.push(res);
-          this.inputMessageSource.next(false);
-        },
-        (err: HttpErrorResponse) => {
-          if (err) {
-            this.inputMessageSource.next(true);
-          }
+    const response = this.http.post(this.addCitiURL, body);
+    response.subscribe(
+      res => {
+        this.inputMessageSource.next(false);
+      },
+      (err: HttpErrorResponse) => {
+        if (err) {
+          this.inputMessageSource.next(true);
         }
-      );
-    }
+      }
+    );
   }
 
   doesItExistInTable(city: string) {

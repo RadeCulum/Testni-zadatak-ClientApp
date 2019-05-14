@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  Input,
-  ChangeDetectorRef,
   AfterViewChecked
 } from '@angular/core';
 
@@ -12,7 +10,6 @@ import { Weather } from '../../models/weather.model';
 import { DataSource } from '@angular/cdk/collections';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-import { timeout } from 'q';
 
 @Component({
   selector: 'weatherTableComponent',
@@ -22,13 +19,14 @@ import { timeout } from 'q';
 export class WeathertableComponent implements OnInit, AfterViewChecked {
   public isLoading = true;
   public isLoadingAfter = false;
+
+  dataSource = new WeatherDataSource(this.weatherService);
+  displayedColumns: string[] = ['city', 'temperature', 'description'];
+
   constructor(
     private weatherService: WeatherService,
     private dialog: MatDialog,
   ) {}
-
-  dataSource = new WeatherDataSource(this.weatherService);
-  displayedColumns: string[] = ['city', 'temperature', 'description'];
 
   ngAfterViewChecked(): void {
     this.isLoading = this.isLoadingAfter;
