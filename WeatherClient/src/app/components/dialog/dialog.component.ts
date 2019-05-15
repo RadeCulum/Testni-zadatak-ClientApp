@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import { Weather } from 'src/app/models/weather.model';
 
 @Component({
   selector: 'dialogComponent',
@@ -11,7 +12,7 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 
 export class DialogComponent implements OnInit {
   constructor(private weatherService: WeatherService,
-              @Inject(MAT_DIALOG_DATA) public weather: any) {}
+              @Inject(MAT_DIALOG_DATA) public weather: Weather) {}
 
   ngOnInit() {
     this.weatherService.dialogMessage.subscribe(message => {

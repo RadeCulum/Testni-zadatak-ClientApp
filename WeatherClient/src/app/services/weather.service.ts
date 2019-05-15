@@ -28,7 +28,7 @@ export class WeatherService {
 
   getWeather(): Observable<Weather[]> {
     this.loaderMessageSource.next(true);
-    const result = this.http.get(this.getWeatherURL);
+    let result = this.http.get(this.getWeatherURL);
     result.subscribe((res: Response) => {
       let i = 0;
       while (res[i]) {
@@ -67,7 +67,7 @@ export class WeatherService {
     return res;
   }
 
-  prepareDialog(weather: any) {
+  prepareDialog(weather: Weather) {
     this.dialogMessageSource.next(weather);
   }
 }
